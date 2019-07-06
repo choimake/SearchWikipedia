@@ -7,19 +7,43 @@ import Alamofire
 import RxSwift
 
 protocol WikipediaAPI {
-    func search(from text: String) -> Observable<[Int]>
+    func search(from text: String) -> Observable<[WikipediaPage]>
 }
 
 class WikipediaDefaultAPI: WikipediaAPI {
 
-    func search(from text: String) -> Observable<[Int]> {
-        return Observable<[Int]>.create {
+    private let endPoint = "https://www.mediawiki.org/w/api.php"
+
+    func search(from word: String) -> Observable<[WikipediaPage]> {
+        return Observable<[WikipediaPage]>.create {
             observer in
 
-            let result = [1, 2, 3]
+            let parameters: Parameters = [
+                "format": "json",
+                "action": "query",
+                "list": "search",
+                "srsearch": word
+            ]
 
-            observer.onNext(result)
-            observer.onCompleted()
+            Alamofire.request(self.endPoint, method: .get, parameters: parameters, encoding: URLEncoding.default)
+                    .responseJSON { response in
+                        switch response.result {
+                        case .success:
+                            // wikipediaの検索結果によっては、decodeに失敗する場合があるので、そのときのための例外処理
+                            // ex) 検索用のワードが空文字
+                            do {
+                                let result = try JSONDecoder().decode(WikipeidaSearchResponse.self, from: response.data!)
+                                observer.onNext(result.query.search)
+                                observer.onCompleted()
+                            } catch {
+                                observer.onError(error)
+                            }
+
+                        case .failure(let error):
+                            print("\(error)")
+                            observer.onError(error)
+                        }
+                    }
 
             return Disposables.create()
         }

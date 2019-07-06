@@ -25,14 +25,14 @@ extension WikipediaSearchViewModel {
     }
 
     struct Output {
-        let searchResult: Observable<[Int]>
+        let searchResult: Observable<[WikipediaPage]>
     }
 
     func transform(input: Input) -> Output {
         let filterText = input.searchText.debounce(.microseconds(300), scheduler: scheduler).share(replay: 1)
 
         let sequence = filterText.flatMapLatest {
-            [unowned self] text -> Observable<Event<[Int]>> in
+            [unowned self] text -> Observable<Event<[WikipediaPage]>> in
             return self.wikipediaAPI.search(from: text).materialize()
         }.share(replay: 1)
 
