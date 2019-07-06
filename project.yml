@@ -1,0 +1,28 @@
+name: SearchWikipedia
+fileGroups:
+  - configs
+configFiles:
+  Debug: configs/Debug.xcconfig
+  Release: configs/Release.xcconfig
+targets:
+  SearchWikipedia:
+    type: application
+    platform: iOS
+    sources: SearchWikipedia
+    configFiles:
+      Debug: configs/SearchWikipedia-Debug.xcconfig
+      Release: configs/SearchWikipedia-Release.xcconfig
+    settings:
+      CURRENT_PROJECT_VERSION: 1
+    scheme:
+      testTargets:
+        - SearchWikipediaTests
+  SearchWikipediaTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources: SearchWikipediaTests
+    configFiles:
+      Debug: configs/SearchWikipediaTests-Debug.xcconfig
+      Release: configs/SearchWikipediaTests-Release.xcconfig
+    dependencies:
+      - target: SearchWikipedia
