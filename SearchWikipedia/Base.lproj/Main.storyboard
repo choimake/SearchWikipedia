@@ -22,11 +22,29 @@
                                 <rect key="frame" x="0.0" y="59" width="414" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9NO-Pb-jJJ">
+                                <rect key="frame" x="0.0" y="115" width="414" height="747"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="gdw-Zf-pyX">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gdw-Zf-pyX" id="5jX-hR-nRy">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="ZJc-JZ-wQ1" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="15" id="5ZZ-Gq-TY9"/>
+                            <constraint firstAttribute="trailing" secondItem="9NO-Pb-jJJ" secondAttribute="trailing" id="68W-8r-ym9"/>
+                            <constraint firstItem="9NO-Pb-jJJ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="G7P-1P-Kc9"/>
                             <constraint firstItem="ZJc-JZ-wQ1" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="KRb-aD-cRb"/>
+                            <constraint firstItem="9NO-Pb-jJJ" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="M1s-ri-NUY"/>
+                            <constraint firstItem="9NO-Pb-jJJ" firstAttribute="top" secondItem="ZJc-JZ-wQ1" secondAttribute="bottom" id="bRt-ck-7Av"/>
                             <constraint firstItem="ZJc-JZ-wQ1" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="jry-yQ-gxJ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -34,6 +52,7 @@
                     <connections>
                         <outlet property="searchBar" destination="ZJc-JZ-wQ1" id="Ap2-WT-ppo"/>
                         <outlet property="searchDisplayController" destination="e6q-iT-vfQ" id="Fym-gY-SmY"/>
+                        <outlet property="tableView" destination="9NO-Pb-jJJ" id="09k-NW-hMs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -46,6 +65,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
+            <point key="canvasLocation" x="137.68115942028987" y="120.53571428571428"/>
         </scene>
     </scenes>
 </document>

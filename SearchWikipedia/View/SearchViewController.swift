@@ -13,6 +13,7 @@ import RxCocoa
 class SearchViewController: UIViewController {
 
     @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var tableView: UITableView!
 
     var viewModel: WikipediaSearchViewModel!
 
@@ -32,12 +33,11 @@ class SearchViewController: UIViewController {
 
         let output = viewModel.transform(input: input)
 
-        output.searchResult.subscribe(
-                onNext: {
-                    value in
-                    print(value)
-                }
-        ).disposed(by: disposeBag)
+        output.searchResult.bind(to: tableView.rx.items(cellIdentifier: "Cell")) {
+            (index, result, cell) in
+            cell.textLabel?.text = result.title
+            cell.detailTextLabel?.text = result.url
+        }.disposed(by: disposeBag)
 
         self.viewModel = viewModel
     }
